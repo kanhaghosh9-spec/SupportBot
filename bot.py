@@ -3,8 +3,12 @@ import os
 from pathlib import Path
 import time
 
-API_KEY = 'token'
-ADMIN_IDS = {123}
+API_KEY = os.getenv("BOT_TOKEN")
+
+ADMIN_IDS = {
+    int(x) for x in os.getenv("ADMIN_IDS", "").split(",")
+    if x.strip().isdigit()
+}
 bot = telebot.TeleBot(API_KEY)
 
 FILES = {
